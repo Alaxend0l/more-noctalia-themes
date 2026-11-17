@@ -36,6 +36,23 @@ minimal add-on (`addon/__init__.py`, ~50 lines):
 - **no timers, no file watching, no live reload** — after startup it runs
   nothing until the next web view is created
 
+## Implementation notes (verified against Anki 26.09.4)
+
+- `gui_hooks.webview_will_set_content(web_content, context)`: the second
+  argument is the *owning UI object* (`TopToolbar`, `DeckBrowser`, `Editor`,
+  …), never a web view — calling `evalOnLoad` on it crashes Anki at startup
+  with `AttributeError`. The add-on therefore prepends
+  `<style id="noctalia-css">` to `web_content.body` instead, which reaches
+  every view (deck picker, browser, reviewer chrome, editor, stats,
+  toolbars, bottom bars).
+- Anki pre-paints each web view's page background with *its own* night-mode
+  canvas color. Anki's night mode is irrelevant to the theme: the variable
+  block overrides both its light and dark declarations (`!important` +
+  in-body injection), and Anki's own page background is never visible
+  because CSS background propagation paints the whole canvas from `body`.
+- Pixel-verified: deck picker renders 100 % palette colors in both Noctalia
+  modes (0 stock `#2c2c2c`/`#f5f5f5` pixels left).
+
 ## How changes take effect
 
 The template regenerates both files on every palette/theme change; Anki
@@ -74,4 +91,7 @@ Per Anki data root (`~/.local/share/Anki2`,
 ## Tested against
 
 - Noctalia v5.5.0
-- Anki 26.09.4 (Flatpak, flathub)
+- Anki 26.09.4 (Flatpak, flathub) — deck picker pixel-verified in dark and
+  light Noctalia palettes; add-on loads with zero errors and injects into
+  every web view (TopToolbar, DeckBrowser, DeckBrowserBottomBar, Editor
+  observed in hook logs)

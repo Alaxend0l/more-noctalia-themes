@@ -6,7 +6,6 @@ logic: Noctalia regenerates the two files when the palette changes, and
 the new colors take effect at the next Anki start.
 """
 
-import json
 import os
 import re
 
@@ -41,23 +40,28 @@ def _apply_qss() -> None:
             pass
 
 
-def _inject_theme(web_content, web_view) -> None:
+def _inject_theme(web_content, context) -> None:
+    # Prepend the stylesheet to the page body: context may be a web view or
+    # a context object (TopToolbar, ...), but web_content.body is always
+    # present, and <style> in body is valid for QtWebEngine.
+    if _CSS.strip():
+        try:
+            web_content.body = (
+                '<style id="noctalia-css">' + _CSS + "</style>" + web_content.body
+            )
+        except Exception:
+            pass
     # Paint the webview background before the page loads: avoids the
     # white flash on dark palettes.
     if _CANVAS:
         try:
-            web_view.webview.page().setBackgroundColor(QColor(_CANVAS))
+            qview = getattr(context, "webview", None) or getattr(
+                getattr(context, "web", None), "webview", None
+            )
+            if qview is not None:
+                qview.page().setBackgroundColor(QColor(_CANVAS))
         except Exception:
             pass
-    if not _CSS.strip():
-        return
-    js = (
-        "(function(){if(document.getElementById('noctalia-css')){return};"
-        "var s=document.createElement('style');s.id='noctalia-css';"
-        "s.textContent=" + json.dumps(_CSS) + ";"
-        "document.documentElement.appendChild(s);})();"
-    )
-    web_view.evalOnLoad(js)
 
 
 main_window_did_init.append(_apply_qss)
