@@ -36,7 +36,10 @@ for root in "${roots[@]}"; do
         found=1
         ensure_import "${profile}chrome/userChrome.css" "noctalia-userchrome.css"
         ensure_import "${profile}chrome/userContent.css" "noctalia-usercontent.css"
-        if ! grep -q 'toolkit.legacyUserProfileCustomizations.stylesheets.*true' \
+        # Waterfox locks this pref to true by default (compiled into the
+        # binary), so it is ABSENT from prefs.js on healthy installs. Only an
+        # explicit user_pref(..., false) should produce a warning.
+        if grep -q 'toolkit.legacyUserProfileCustomizations.stylesheets", value false' \
                 "${profile}prefs.js" 2>/dev/null; then
             flag_missing=1
         fi

@@ -97,15 +97,26 @@
   --input-border-color: var(--nkt-border) !important;
 }
 
-/* Fallback direct rules for surfaces the variables above may not cover
-   (Waterfox legacy UI toggled off Photon, older G6 builds). Kept narrow on
-   purpose so they never fight with per-element states. */
+/* Direct rules on the surfaces that actually paint. On Waterfox 6.x the
+   built-in Photon theme paints #nav-bar / #TabsToolbar / .titlebar-color
+   opaquely at the element level, so an override on #navigator-toolbox or
+   :root variables never reaches the visible pixels. Keep the element list
+   below aimed at the real paint surfaces. (Verified against Waterfox 6.7.8
+   with cascade probes: toolbox background and :root LWT variables are both
+   visually dead; element rules on the toolbars themselves are required.) */
 #navigator-toolbox,
+.titlebar-color,
+#titlebar,
+#browser,
 #nav-bar,
 #TabsToolbar,
 #PersonalToolbar {
   background-color: var(--nkt-container) !important;
   color: var(--nkt-fg) !important;
+}
+
+#navigator-toolbox {
+  border-bottom: 1px solid var(--nkt-border) !important;
 }
 
 #sidebar-box,
@@ -115,7 +126,8 @@
   color: var(--nkt-fg) !important;
 }
 
-#urlbar:not([breakout-extend="true"]),
+/* urlbar / searchbar fields paint via their -background elements */
+#urlbar > #urlbar-background,
 #searchbar {
   background-color: var(--nkt-container-high) !important;
   color: var(--nkt-fg) !important;
@@ -130,5 +142,22 @@
 }
 
 .tabbrowser-tab[selected="true"] .tab-background {
-  background-color: var(--nkt-container) !important;
+  background-color: var(--nkt-container-high) !important;
+}
+
+/* Re-declare the core LWT variables on the painting elements themselves, in
+   case the built-in theme's rules consume them at element level. */
+.titlebar-color,
+#nav-bar,
+#TabsToolbar {
+  --lwt-header-image: none !important;
+  --lwt-frame: var(--nkt-container) !important;
+  --lwt-accent-color: var(--nkt-surface-dim) !important;
+  --lwt-text-color: var(--nkt-fg) !important;
+  --toolbar-bgcolor: var(--nkt-container) !important;
+  --toolbar-bgimage: none !important;
+  --toolbar-color: var(--nkt-fg) !important;
+  --toolbar-non-lwt-bgcolor: var(--nkt-container) !important;
+  --toolbar-non-lwt-bgimage: none !important;
+  --toolbar-non-lwt-textcolor: var(--nkt-fg) !important;
 }

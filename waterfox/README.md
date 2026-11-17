@@ -24,10 +24,10 @@ Noctalia palette.
 ## Prerequisites / setup
 
 1. Waterfox installed and started at least once (a profile must exist).
-2. In Waterfox, open `about:config` and set
-   `toolkit.legacyUserProfileCustomizations.stylesheets` → `true`, then
-   restart Waterfox. Until this is set the hook reports a `Warning:` in
-   Noctalia Settings.
+2. The pref `toolkit.legacyUserProfileCustomizations.stylesheets` must be
+   `true`. **Waterfox locks it to true by default** (upstream Firefox locks
+   it to false); only set it manually in `about:config` if your build follows
+   the Firefox default. The hook warns if it finds an explicit `false`.
 3. **Live route only:** install the
    [Pywalfox](https://addons.mozilla.org/en-US/firefox/addon/pywalfox/)
    extension and disable the `userchrome`/`usercontent` entries (enabling
