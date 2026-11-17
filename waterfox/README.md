@@ -21,6 +21,27 @@ Noctalia palette.
 | `usercontent` | Same for `noctalia-usercontent.css` / `userContent.css`. |
 | `colors` | Writes pywal-compatible `$XDG_CACHE_HOME/wal/colors.json` and uses Noctalia as the Pywalfox native-messaging host (live updates). **Native Waterfox only** — see below. |
 
+## Waterfox 6.x / legacy UI notes
+
+Verified against Waterfox 6.7.8 (Flatpak, flathub, legacy UI with tabs below
+the navigation bar and a vertical tab list, 1.25x display scale):
+
+- The built-in theme paints toolbar surfaces at element level; overriding
+  `#navigator-toolbox` or `:root` LWT variables changes no visible pixels.
+  Element rules (`.titlebar-color`, `#nav-bar`, `#TabsToolbar`, …) are
+  required, which the template provides.
+- Unselected tab backgrounds are set via **`!important` inline styles** by
+  Waterfox's theme JS — an `!important` author `background-color` loses to
+  them. The template paints tabs with solid gradients as `background-image`
+  instead: images paint over inline colors, and inline styles do not set
+  images.
+- The legacy vertical tab list still uses `.tabbrowser-tab` /
+  `.tab-background` elements (but not under `#tabbrowser-tabs`), so tab
+  rules are written without that ancestor.
+- `about:config` → `toolkit.legacyUserProfileCustomizations.stylesheets` is
+  locked `true` upstream (unlike Firefox); it is absent from `prefs.js` on
+  healthy installs.
+
 ## Prerequisites / setup
 
 1. Waterfox installed and started at least once (a profile must exist).

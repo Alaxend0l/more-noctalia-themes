@@ -162,12 +162,11 @@
   background-image: linear-gradient(var(--nkt-container-highest), var(--nkt-container-highest)) !important;
 }
 
-/* Chrome documents embedded in the window (Places/Waterfox bookmarks
-   sidebar, chrome:// dialogs): they live in browser chrome but render an
-   HTML body the toolbar variables never reach. userChrome ignores
-   @-moz-document, so target the body type selector (author sheets match any
-   namespace); in-content pages (about:preferences etc.) are NOT chrome
-   documents and are unaffected. */
+/* Chrome documents embedded in the window (chrome:// dialogs, embedded
+   panels): they render an HTML body the toolbar variables never reach.
+   userChrome ignores @-moz-document, so target the body type selector
+   (author sheets match any namespace); in-content pages (about:preferences
+   etc.) are NOT chrome documents and are unaffected. */
 body {
   background-color: var(--nkt-container) !important;
   color: var(--nkt-fg) !important;
