@@ -29,3 +29,19 @@ hook_async          = false
 # post_hook   = "bash '/home/alaxendol/Develop/more-noctalia-themes/waterfox/link_manifest.sh'"
 # undo_hook   = "bash '/home/alaxendol/Develop/more-noctalia-themes/waterfox/unlink_manifest.sh'"
 # hook_async  = false
+
+# --- Anki ---
+# undo_hook is community-template-only (see note above); run
+# `bash anki/uninstall_addon.sh` manually to clean up during testing.
+
+[theme.templates.user.anki-webcss]
+input_path          = "/home/alaxendol/Develop/more-noctalia-themes/anki/noctalia-web.css"
+output_path_dynamic = "bash '/home/alaxendol/Develop/more-noctalia-themes/anki/find_anki_dirs.sh' noctalia.css"
+post_hook           = "bash '/home/alaxendol/Develop/more-noctalia-themes/anki/install_addon.sh'"
+hook_async          = false
+
+[theme.templates.user.anki-qtqss]
+input_path          = "/home/alaxendol/Develop/more-noctalia-themes/anki/noctalia-qt.qss"
+output_path_dynamic = "bash '/home/alaxendol/Develop/more-noctalia-themes/anki/find_anki_dirs.sh' noctalia.qss"
+post_hook           = "bash '/home/alaxendol/Develop/more-noctalia-themes/anki/install_addon.sh'"
+hook_async          = false

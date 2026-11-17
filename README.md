@@ -6,8 +6,8 @@ yet, laid out so they can be PR'd upstream unchanged.
 
 | Dir | App | Status |
 | --- | --- | --- |
-| `waterfox/` | Waterfox (Firefox fork) | first cut |
-| `anki/` | Anki | not started |
+| `waterfox/` | Waterfox (Firefox fork) | verified working (6.7.8 flatpak) |
+| `anki/` | Anki (23.10+ UI) | first cut, pending visual verification |
 
 ## Test locally as user templates
 

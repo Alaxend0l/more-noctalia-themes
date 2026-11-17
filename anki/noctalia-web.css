@@ -1,0 +1,88 @@
+/*
+ * Noctalia theme for Anki (web views) - GENERATED FILE, DO NOT EDIT.
+ * Rendered from {{image}} (mode: {{mode}}) whenever the Noctalia palette
+ * changes. Injected into every Anki web view (deck picker, browser,
+ * reviewer chrome, editor, stats, add-on config) by the noctalia_theme
+ * companion add-on.
+ *
+ * Anki's generated web CSS consumes one documented custom-property set at
+ * :root / :root.night-mode, so overriding the variables re-themes every
+ * web surface without touching element rules. The !important flags win
+ * over Anki's own :root.night-mode declaration (higher specificity but
+ * not important).
+ */
+
+:root {
+  /* text */
+  --fg: {{ colors.on_surface.default.hex }} !important;
+  --fg-subtle: {{ colors.on_surface_variant.default.hex }} !important;
+  --fg-disabled: {{ colors.on_surface_variant.default.rgba | set_alpha 0.6 }} !important;
+  --fg-faint: {{ colors.outline_variant.default.hex }} !important;
+  --fg-link: {{ colors.primary.default.hex }} !important;
+
+  /* surfaces */
+  --canvas: {{ colors.surface.default.hex }} !important;
+  --canvas-elevated: {{ colors.surface_container.default.hex }} !important;
+  --canvas-inset: {{ colors.surface_container_high.default.hex }} !important;
+  --canvas-overlay: {{ colors.surface_container_high.default.hex }} !important;
+  --canvas-code: {{ colors.surface_dim.default.hex }} !important;
+  --canvas-glass: {{ colors.surface_container.default.rgba | set_alpha 0.6 }} !important;
+
+  /* borders */
+  --border: {{ colors.outline_variant.default.hex }} !important;
+  --border-subtle: {{ colors.outline_variant.default.rgba | set_alpha 0.5 }} !important;
+  --border-strong: {{ colors.outline.default.hex }} !important;
+  --border-focus: {{ colors.primary.default.hex }} !important;
+
+  /* buttons */
+  --button-bg: {{ colors.surface_container_high.default.hex }} !important;
+  --button-gradient-start: {{ colors.surface_container_high.default.hex }} !important;
+  --button-gradient-end: {{ colors.surface_container.default.hex }} !important;
+  --button-hover-border: {{ colors.outline.default.hex }} !important;
+  --button-disabled: {{ colors.on_surface.default.rgba | set_alpha 0.12 }} !important;
+  --button-primary-bg: {{ colors.primary.default.hex }} !important;
+  --button-primary-gradient-start: {{ colors.primary.default.hex }} !important;
+  --button-primary-gradient-end: {{ colors.primary.default.hex }} !important;
+  --button-primary-disabled: {{ colors.primary.default.rgba | set_alpha 0.35 }} !important;
+
+  /* scrollbars (Linux/Windows) */
+  --scrollbar-bg: {{ colors.surface_container_high.default.hex }} !important;
+  --scrollbar-bg-hover: {{ colors.surface_container_highest.default.hex }} !important;
+  --scrollbar-bg-active: {{ colors.outline_variant.default.hex }} !important;
+
+  /* shadows */
+  --shadow: {{ colors.shadow.default.rgba | set_alpha 0.4 }} !important;
+  --shadow-inset: {{ colors.surface_dim.default.hex }} !important;
+  --shadow-subtle: {{ colors.shadow.default.rgba | set_alpha 0.2 }} !important;
+  --shadow-focus: {{ colors.primary.default.hex }} !important;
+
+  /* accents */
+  --accent-card: {{ colors.primary.default.hex }} !important;
+  --accent-note: {{ colors.tertiary.default.hex }} !important;
+  --accent-danger: {{ colors.error.default.hex }} !important;
+
+  /* flags (keep the seven distinguishable hues from the palette) */
+  --flag-1: {{ colors.terminal_normal_red.default.hex }} !important;
+  --flag-2: {{ colors.terminal_bright_yellow.default.hex }} !important;
+  --flag-3: {{ colors.terminal_normal_green.default.hex }} !important;
+  --flag-4: {{ colors.terminal_normal_blue.default.hex }} !important;
+  --flag-5: {{ colors.terminal_bright_magenta.default.hex }} !important;
+  --flag-6: {{ colors.terminal_normal_cyan.default.hex }} !important;
+  --flag-7: {{ colors.terminal_bright_blue.default.hex }} !important;
+
+  /* deck/card state colors */
+  --state-new: {{ colors.terminal_normal_blue.default.hex }} !important;
+  --state-learn: {{ colors.terminal_normal_red.default.hex }} !important;
+  --state-review: {{ colors.terminal_normal_green.default.hex }} !important;
+  --state-buried: {{ colors.terminal_normal_yellow.default.hex }} !important;
+  --state-suspended: {{ colors.terminal_bright_yellow.default.hex }} !important;
+  --state-marked: {{ colors.terminal_normal_magenta.default.hex }} !important;
+
+  /* selection / highlight */
+  --highlight-bg: {{ colors.primary.default.rgba | set_alpha 0.45 }} !important;
+  --highlight-fg: {{ colors.on_primary.default.hex }} !important;
+  --selected-bg: {{ colors.primary_container.default.rgba | set_alpha 0.5 }} !important;
+  --selected-fg: {{ colors.on_surface.default.hex }} !important;
+
+  color-scheme: {{mode}} !important;
+}
