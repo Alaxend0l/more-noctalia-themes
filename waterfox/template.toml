@@ -1,0 +1,40 @@
+# Noctalia community template: Waterfox
+# Layout follows https://github.com/noctalia-dev/community-templates
+
+[catalog.waterfox]
+name = "Waterfox"
+category = "browser"
+
+# --- Static route (works for native and Flatpak Waterfox) -------------------
+# Renders palette-aware userChrome.css / userContent.css into every Waterfox
+# profile and wires them up with @import lines. Colors apply when Waterfox
+# (re)starts.
+
+[templates.userchrome]
+input_path          = "noctalia-userchrome.css"
+output_path_dynamic = "bash '{{ config_dir }}/find_profiles.sh' noctalia-userchrome.css"
+post_hook           = "bash '{{ config_dir }}/link_userchrome.sh'"
+undo_hook           = "bash '{{ config_dir }}/unlink_userchrome.sh'"
+hook_async          = false
+
+[templates.usercontent]
+input_path          = "noctalia-usercontent.css"
+output_path_dynamic = "bash '{{ config_dir }}/find_profiles.sh' noctalia-usercontent.css"
+post_hook           = "bash '{{ config_dir }}/link_userchrome.sh'"
+undo_hook           = "bash '{{ config_dir }}/unlink_userchrome.sh'"
+hook_async          = false
+
+# --- Live route (Pywalfox extension, native Waterfox only) ------------------
+# Writes a pywal-compatible colors.json and lets Noctalia act as the Pywalfox
+# native-messaging host (same mechanism as the community `pywalfox` template,
+# which targets Firefox). `link_manifest.sh` copies the Noctalia-owned
+# manifest into the Waterfox host directory so the extension can reach it.
+# On Flatpak the host binary is not visible inside the sandbox; see README.
+
+[templates.colors]
+input_path  = "colors.json"
+output_path = "$XDG_CACHE_HOME/wal/colors.json"
+post_action = "firefox-theme"
+post_hook   = "bash '{{ config_dir }}/link_manifest.sh'"
+undo_hook   = "bash '{{ config_dir }}/unlink_manifest.sh'"
+hook_async  = false

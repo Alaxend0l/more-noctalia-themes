@@ -1,0 +1,134 @@
+/*
+ * Noctalia theme for Waterfox - GENERATED FILE, DO NOT EDIT.
+ * Rendered from {{image}} (mode: {{mode}}) whenever the Noctalia palette
+ * changes. Edit the template input instead, or your own rules in
+ * userChrome.css after the @import line.
+ *
+ * Palette tokens are mapped onto the Firefox/Waterfox LWT (lightweight theme)
+ * variables first, with direct selector rules below as a fallback for builds
+ * that ignore the variables (older Waterfox / legacy UI).
+ */
+
+:root {
+  --nkt-surface: {{ colors.surface.default.hex }};
+  --nkt-surface-dim: {{ colors.surface_dim.default.hex }};
+  --nkt-container: {{ colors.surface_container.default.hex }};
+  --nkt-container-high: {{ colors.surface_container_high.default.hex }};
+  --nkt-container-highest: {{ colors.surface_container_highest.default.hex }};
+  --nkt-fg: {{ colors.on_surface.default.hex }};
+  --nkt-fg-muted: {{ colors.on_surface_variant.default.hex }};
+  --nkt-primary: {{ colors.primary.default.hex }};
+  --nkt-on-primary: {{ colors.on_primary.default.hex }};
+  --nkt-primary-container: {{ colors.primary_container.default.hex }};
+  --nkt-on-primary-container: {{ colors.on_primary_container.default.hex }};
+  --nkt-error: {{ colors.error.default.hex }};
+  --nkt-border: {{ colors.outline_variant.default.hex }};
+  --nkt-outline: {{ colors.outline.default.hex }};
+  --nkt-hover: {{ colors.on_surface.default.rgba | set_alpha 0.08 }};
+  --nkt-active: {{ colors.on_surface.default.rgba | set_alpha 0.14 }};
+}
+
+:root {
+  /* window + general text */
+  --lwt-accent-color: var(--nkt-surface-dim) !important;
+  --lwt-text-color: var(--nkt-fg) !important;
+  --lwt-header-image: none !important;
+
+  /* toolbars */
+  --toolbar-bgcolor: var(--nkt-container) !important;
+  --toolbar-bgimage: none !important;
+  --toolbar-color: var(--nkt-fg) !important;
+  --toolbar-non-lwt-bgcolor: var(--nkt-container) !important;
+  --toolbar-non-lwt-bgimage: none !important;
+  --toolbar-non-lwt-textcolor: var(--nkt-fg) !important;
+
+  /* url bar / search bar */
+  --toolbar-field-color: var(--nkt-fg) !important;
+  --toolbar-field-background-color: var(--nkt-container-high) !important;
+  --toolbar-field-border-color: var(--nkt-border) !important;
+  --toolbar-field-focus-color: var(--nkt-fg) !important;
+  --toolbar-field-focus-background-color: var(--nkt-container-highest) !important;
+  --toolbar-field-focus-border-color: var(--nkt-primary) !important;
+
+  /* toolbar buttons */
+  --toolbarbutton-hover-background: var(--nkt-hover) !important;
+  --toolbarbutton-active-background: var(--nkt-active) !important;
+  --button-hover-bgcolor: var(--nkt-hover) !important;
+  --button-active-bgcolor: var(--nkt-active) !important;
+
+  /* tabs */
+  --tab-bgcolor: var(--nkt-surface-dim) !important;
+  --tab-selected-bgcolor: var(--nkt-container) !important;
+  --tab-selected-textcolor: var(--nkt-fg) !important;
+  --tab-line-color: var(--nkt-primary) !important;
+  --tab-loading-fill: var(--nkt-primary) !important;
+
+  /* separators */
+  --chrome-content-sep-color: var(--nkt-border) !important;
+
+  /* panels (app menu, urlbar dropdown, proton panels) */
+  --panel-background: var(--nkt-container-high) !important;
+  --panel-color: var(--nkt-fg) !important;
+  --panel-separator-color: var(--nkt-border) !important;
+  --panel-description-color: var(--nkt-fg-muted) !important;
+  --panel-item-hover-bgcolor: var(--nkt-hover) !important;
+  --panel-item-active-bgcolor: var(--nkt-active) !important;
+  --arrowpanel-background: var(--nkt-container-high) !important;
+  --arrowpanel-color: var(--nkt-fg) !important;
+  --arrowpanel-border-color: var(--nkt-border) !important;
+  --arrowpanel-dimmed: var(--nkt-hover) !important;
+  --arrowpanel-dimmed-further: var(--nkt-active) !important;
+
+  /* urlbar autocomplete popup */
+  --autocomplete-popup-background: var(--nkt-container-high) !important;
+  --autocomplete-popup-color: var(--nkt-fg) !important;
+  --autocomplete-popup-highlight-background: var(--nkt-hover) !important;
+  --autocomplete-popup-highlight-color: var(--nkt-primary) !important;
+
+  /* sidebar */
+  --sidebar-background-color: var(--nkt-container) !important;
+  --lwt-sidebar-background-color: var(--nkt-container) !important;
+  --lwt-sidebar-text-color: var(--nkt-fg) !important;
+  --sidebar-border-color: var(--nkt-border) !important;
+
+  /* in-content forms (preferences pages rendered as chrome) */
+  --input-bgcolor: var(--nkt-container-high) !important;
+  --input-color: var(--nkt-fg) !important;
+  --input-border-color: var(--nkt-border) !important;
+}
+
+/* Fallback direct rules for surfaces the variables above may not cover
+   (Waterfox legacy UI toggled off Photon, older G6 builds). Kept narrow on
+   purpose so they never fight with per-element states. */
+#navigator-toolbox,
+#nav-bar,
+#TabsToolbar,
+#PersonalToolbar {
+  background-color: var(--nkt-container) !important;
+  color: var(--nkt-fg) !important;
+}
+
+#sidebar-box,
+#sidebar-header,
+#sidebar {
+  background-color: var(--nkt-container) !important;
+  color: var(--nkt-fg) !important;
+}
+
+#urlbar:not([breakout-extend="true"]),
+#searchbar {
+  background-color: var(--nkt-container-high) !important;
+  color: var(--nkt-fg) !important;
+  border-color: var(--nkt-border) !important;
+}
+
+/* Accent for focus rings and selected items */
+#urlbar[focused="true"] > #urlbar-background,
+#searchbar:focus-within {
+  outline-color: var(--nkt-primary) !important;
+  border-color: var(--nkt-primary) !important;
+}
+
+.tabbrowser-tab[selected="true"] .tab-background {
+  background-color: var(--nkt-container) !important;
+}

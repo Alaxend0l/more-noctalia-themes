@@ -1,0 +1,30 @@
+/*
+ * Noctalia theme for Waterfox (content pages) - GENERATED FILE, DO NOT EDIT.
+ * Rendered from {{image}} (mode: {{mode}}). Covers about:newtab / about:home /
+ * about:privatebrowsing through their theme variables.
+ * about:preferences and about:addons are privileged pages; see README for the
+ * current limitation.
+ */
+
+@-moz-document url(about:newtab), url(about:home), url(about:privatebrowsing) {
+  :root {
+    --newtab-background-color: {{ colors.surface.default.hex }} !important;
+    --newtab-background-color-secondary: {{ colors.surface_container.default.hex }} !important;
+    --newtab-text-primary-color: {{ colors.on_surface.default.hex }} !important;
+    --newtab-text-secondary-color: {{ colors.on_surface_variant.default.hex }} !important;
+    --newtab-primary-action-background: {{ colors.primary.default.hex }} !important;
+    --newtab-primary-action-text: {{ colors.on_primary.default.hex }} !important;
+    --newtab-primary-element-text-color: {{ colors.on_primary.default.hex }} !important;
+    --newtab-border-primary-color: {{ colors.outline.default.hex }} !important;
+    --newtab-border-secondary-color: {{ colors.outline_variant.default.hex }} !important;
+    --newtab-card-background-color: {{ colors.surface_container.default.hex }} !important;
+    --newtab-card-border-color: {{ colors.outline_variant.default.hex }} !important;
+    --newtab-search-icon-color: {{ colors.on_surface_variant.default.hex }} !important;
+    --newtab-contextmenu-background-color: {{ colors.surface_container_high.default.hex }} !important;
+    --newtab-element-hover-color: {{ colors.on_surface.default.rgba | set_alpha 0.08 }} !important;
+    --newtab-element-active-color: {{ colors.on_surface.default.rgba | set_alpha 0.14 }} !important;
+    --card-outer-background-color: {{ colors.surface_container.default.hex }} !important;
+    --card-preview-image-destabilization-color: {{ colors.primary_container.default.hex }} !important;
+    --box-shadow-color: {{ colors.shadow.default.rgba | set_alpha 0.3 }} !important;
+  }
+}

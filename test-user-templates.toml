@@ -1,0 +1,31 @@
+# User-template blocks for testing this working copy.
+# Append to ~/.config/noctalia/config.toml (or ~/.config/noctalia/templates.toml).
+# Paths are absolute on purpose: a user template's {{ config_dir }} is the
+# Noctalia config dir, not this repo (the community manifest uses
+# {{ config_dir }}; that only works once merged/cached as a community copy).
+
+[theme.templates.user.waterfox-userchrome]
+input_path          = "/home/alaxendol/Develop/more-noctalia-themes/waterfox/noctalia-userchrome.css"
+output_path_dynamic = "bash '/home/alaxendol/Develop/more-noctalia-themes/waterfox/find_profiles.sh' noctalia-userchrome.css"
+post_hook           = "bash '/home/alaxendol/Develop/more-noctalia-themes/waterfox/link_userchrome.sh'"
+hook_async          = false
+
+[theme.templates.user.waterfox-usercontent]
+input_path          = "/home/alaxendol/Develop/more-noctalia-themes/waterfox/noctalia-usercontent.css"
+output_path_dynamic = "bash '/home/alaxendol/Develop/more-noctalia-themes/waterfox/find_profiles.sh' noctalia-usercontent.css"
+post_hook           = "bash '/home/alaxendol/Develop/more-noctalia-themes/waterfox/link_userchrome.sh'"
+hook_async          = false
+
+# undo_hook is community-template-only (v5.5.0 validates user entries against
+# the docs list, which omits it) — it stays in waterfox/template.toml for the
+# upstream submission, but must not appear in user entries. Clean up during
+# testing with: bash waterfox/unlink_userchrome.sh
+
+# Live Pywalfox route — only useful for a NATIVE (non-Flatpak) Waterfox.
+# [theme.templates.user.waterfox-colors]
+# input_path  = "/home/alaxendol/Develop/more-noctalia-themes/waterfox/colors.json"
+# output_path = "$XDG_CACHE_HOME/wal/colors.json"
+# post_action = "firefox-theme"
+# post_hook   = "bash '/home/alaxendol/Develop/more-noctalia-themes/waterfox/link_manifest.sh'"
+# undo_hook   = "bash '/home/alaxendol/Develop/more-noctalia-themes/waterfox/unlink_manifest.sh'"
+# hook_async  = false
