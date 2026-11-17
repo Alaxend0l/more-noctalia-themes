@@ -145,6 +145,30 @@
   background-color: var(--nkt-container-high) !important;
 }
 
+/* Tab surfaces: Waterfox 6.7.8 ignores --tab-bgcolor / --tab-selected-bgcolor
+   (cascade probes: tabs stay Photon grey #414447 while :root variables reach
+   the toolbars), so paint the .tab-background stack directly. */
+.tabbrowser-tab .tab-background {
+  background-color: var(--nkt-container) !important;
+}
+.tabbrowser-tab:hover:not([selected="true"]) .tab-background {
+  background-color: var(--nkt-container-high) !important;
+}
+.tabbrowser-tab[selected="true"]:hover .tab-background {
+  background-color: var(--nkt-container-highest) !important;
+}
+
+/* Chrome documents embedded in the window (Places/Waterfox bookmarks
+   sidebar, chrome:// dialogs): they live in browser chrome but render an
+   HTML body the toolbar variables never reach. userChrome ignores
+   @-moz-document, so target the body type selector (author sheets match any
+   namespace); in-content pages (about:preferences etc.) are NOT chrome
+   documents and are unaffected. */
+body {
+  background-color: var(--nkt-container) !important;
+  color: var(--nkt-fg) !important;
+}
+
 /* Re-declare the core LWT variables on the painting elements themselves, in
    case the built-in theme's rules consume them at element level. */
 .titlebar-color,
