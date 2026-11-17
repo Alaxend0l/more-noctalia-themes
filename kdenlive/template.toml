@@ -1,0 +1,36 @@
+# Noctalia community template: Kdenlive
+# Layout follows https://github.com/noctalia-dev/community-templates
+
+[catalog.kdenlive]
+name = "Kdenlive"
+category = "editor"
+
+# Kdenlive's widget chrome and most of its QML timeline (rulers, track heads,
+# playhead, panels) follow KColorScheme — enable Noctalia's built-in
+# KColorScheme template and that half is covered. This template adds the
+# surfaces Kdenlive paints from its own Color entries in kdenliverc: timeline
+# clip tints ([unmanaged] videoColor/audioColor/...), audio waveforms
+# (thumbColor1/2), monitor overlay guides (overlayColor), the GL monitor
+# backdrop ([sdl] window_background), and the per-app scheme pin
+# ([UiSettings] ColorScheme, which otherwise keeps e.g. BreezeDark forever).
+# kdenliverc also stores the whole window layout, so it can never be an
+# output_path: the rendered colors.conf spec is pushed into it entry-by-entry
+# by apply.sh using KDE's own kwriteconfig6 --notify (no injection, no
+# add-on, no watcher). Guide categories, bin tags and the monitor's black
+# backdrop are user data / video-critical defaults and deliberately untouched.
+
+[templates.kdenlive]
+input_path    = "noctalia-colors.conf"
+output_path   = "$XDG_CACHE_HOME/noctalia/kdenlive/colors.conf"
+post_hook     = "bash '{{ config_dir }}/apply.sh'"
+undo_hook     = "bash '{{ config_dir }}/undo.sh'"
+hook_async    = false
+requires_path = "~/.config/kdenliverc"
+
+[templates.kdenlive-flatpak]
+input_path    = "noctalia-colors.conf"
+output_path   = "$XDG_CACHE_HOME/noctalia/kdenlive/colors.conf"
+post_hook     = "bash '{{ config_dir }}/apply.sh'"
+undo_hook     = "bash '{{ config_dir }}/undo.sh'"
+hook_async    = false
+requires_path = "~/.var/app/org.kde.kdenlive/config/kdenliverc"

@@ -45,3 +45,22 @@ input_path          = "/home/alaxendol/Develop/more-noctalia-themes/anki/noctali
 output_path_dynamic = "bash '/home/alaxendol/Develop/more-noctalia-themes/anki/find_anki_dirs.sh' noctalia.qss"
 post_hook           = "bash '/home/alaxendol/Develop/more-noctalia-themes/anki/install_addon.sh'"
 hook_async          = false
+
+# --- Kdenlive ---
+# undo_hook AND requires_path are community-template-only in v5.5.0 (validator
+# warns on user entries; see waterfox note above); apply.sh itself warns
+# loudly if no kdenliverc exists. Clean up with `bash kdenlive/undo.sh`.
+# Apply while Kdenlive is closed: a running Kdenlive rewrites kdenliverc on
+# exit.
+
+[theme.templates.user.kdenlive]
+input_path    = "/home/alaxendol/Develop/more-noctalia-themes/kdenlive/noctalia-colors.conf"
+output_path   = "$XDG_CACHE_HOME/noctalia/kdenlive/colors.conf"
+post_hook     = "bash '/home/alaxendol/Develop/more-noctalia-themes/kdenlive/apply.sh'"
+hook_async    = false
+
+[theme.templates.user.kdenlive-flatpak]
+input_path    = "/home/alaxendol/Develop/more-noctalia-themes/kdenlive/noctalia-colors.conf"
+output_path   = "$XDG_CACHE_HOME/noctalia/kdenlive/colors.conf"
+post_hook     = "bash '/home/alaxendol/Develop/more-noctalia-themes/kdenlive/apply.sh'"
+hook_async    = false
