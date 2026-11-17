@@ -141,21 +141,25 @@
   border-color: var(--nkt-primary) !important;
 }
 
-.tabbrowser-tab[selected="true"] .tab-background {
-  background-color: var(--nkt-container-high) !important;
-}
-
-/* Tab surfaces: Waterfox 6.7.8 ignores --tab-bgcolor / --tab-selected-bgcolor
-   (cascade probes: tabs stay Photon grey #414447 while :root variables reach
-   the toolbars), so paint the .tab-background stack directly. */
-.tabbrowser-tab .tab-background {
-  background-color: var(--nkt-container) !important;
+/* Tab surfaces: Waterfox 6.7.8 paints unselected tab backgrounds with
+   !important inline styles (probes: an !important author background-color
+   loses to them, while a background-IMAGE paints over the inline color and
+   wins). Solid gradients are used as the image. Broad .tab-background
+   coverage because the legacy UI also shows a vertical tab list whose
+   markup differs from the horizontal strip. */
+.tabbrowser-tab .tab-background,
+.tab-background {
+  background-image: linear-gradient(var(--nkt-container), var(--nkt-container)) !important;
 }
 .tabbrowser-tab:hover:not([selected="true"]) .tab-background {
-  background-color: var(--nkt-container-high) !important;
+  background-image: linear-gradient(var(--nkt-container-high), var(--nkt-container-high)) !important;
+}
+.tabbrowser-tab[selected="true"] .tab-background,
+.tab-background[selected="true"] {
+  background-image: linear-gradient(var(--nkt-container-high), var(--nkt-container-high)) !important;
 }
 .tabbrowser-tab[selected="true"]:hover .tab-background {
-  background-color: var(--nkt-container-highest) !important;
+  background-image: linear-gradient(var(--nkt-container-highest), var(--nkt-container-highest)) !important;
 }
 
 /* Chrome documents embedded in the window (Places/Waterfox bookmarks
