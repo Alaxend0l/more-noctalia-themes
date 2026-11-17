@@ -17,6 +17,13 @@ QWidget { color: {{ colors.on_surface.default.hex }}; }
 QMenuBar {
   background-color: {{ colors.surface_container.default.hex }};
   color: {{ colors.on_surface.default.hex }};
+  /* Anki's sheet puts a stock BORDER_SUBTLE line under the menu bar; repeat
+     the property so the appended rule wins and the separator follows the
+     palette. */
+  border-bottom: 1px solid {{ colors.outline_variant.default.rgba | set_alpha 0.5 }};
+}
+QMenuBar::item {
+  background-color: transparent;
 }
 QMenuBar::item:selected {
   background-color: {{ colors.surface_container_high.default.hex }};
@@ -65,10 +72,120 @@ QScrollBar::add-line, QScrollBar::sub-line {
   width: 0; height: 0;
 }
 
+/* Table header. Anki's own sheet styles the header corners and states
+   explicitly (section:first/:last/:only-one get a stock border, :hover and
+   :pressed get a gradient, and QHeaderView itself paints the strip right of
+   the last section plus the corner button), so those exact selectors have to
+   be repeated here - this file is appended after Anki's, so the equal
+   specificity rules win. */
+QHeaderView {
+  background-color: {{ colors.surface_container.default.hex }};
+}
 QHeaderView::section {
   background-color: {{ colors.surface_container.default.hex }};
   color: {{ colors.on_surface_variant.default.hex }};
   border: 1px solid {{ colors.outline_variant.default.rgba | set_alpha 0.5 }};
+}
+QHeaderView::section:first,
+QHeaderView::section:last,
+QHeaderView::section:only-one {
+  border: 1px solid {{ colors.outline_variant.default.rgba | set_alpha 0.5 }};
+}
+QHeaderView::section:hover {
+  background-color: {{ colors.surface_container_high.default.hex }};
+  color: {{ colors.on_surface.default.hex }};
+}
+QHeaderView::section:pressed,
+QHeaderView::section:pressed:!first {
+  background-color: {{ colors.surface_container_highest.default.hex }};
+}
+QTableView QTableCornerButton::section {
+  background-color: {{ colors.surface_container.default.hex }};
+  border: 1px solid {{ colors.outline_variant.default.rgba | set_alpha 0.5 }};
+}
+
+/* Item views (the card browser's native deck/tag sidebar and card table,
+   lists in dialogs): these paint their own backgrounds, so QSS must name
+   them explicitly. */
+QTreeView, QListView, QColumnView, QTableView {
+  background-color: {{ colors.surface_container.default.hex }};
+  color: {{ colors.on_surface.default.hex }};
+  alternate-background-color: {{ colors.surface_container_high.default.hex }};
+  border: 1px solid {{ colors.outline_variant.default.rgba | set_alpha 0.5 }};
+  selection-background-color: {{ colors.primary.default.rgba | set_alpha 0.45 }};
+  selection-color: {{ colors.on_surface.default.hex }};
+}
+QTableView {
+  gridline-color: {{ colors.outline_variant.default.rgba | set_alpha 0.5 }};
+}
+QTreeView::item:selected, QListView::item:selected, QColumnView::item:selected,
+QTableView::item:selected {
+  background-color: {{ colors.primary.default.rgba | set_alpha 0.45 }};
+  color: {{ colors.on_surface.default.hex }};
+}
+QTreeView::item:hover, QListView::item:hover, QColumnView::item:hover,
+QTableView::item:hover {
+  background-color: {{ colors.surface_container_high.default.hex }};
+}
+
+/* Input widgets (browser search bar, spin boxes and combo boxes in
+   dialogs) */
+QLineEdit, QComboBox, QSpinBox, QDoubleSpinBox, QPlainTextEdit, QTextEdit {
+  background-color: {{ colors.surface_container_high.default.hex }};
+  color: {{ colors.on_surface.default.hex }};
+  border: 1px solid {{ colors.outline_variant.default.rgba | set_alpha 0.5 }};
+  border-radius: 4px;
+  selection-background-color: {{ colors.primary.default.hex }};
+  selection-color: {{ colors.on_primary.default.hex }};
+}
+QComboBox QAbstractItemView {
+  background-color: {{ colors.surface_container_high.default.hex }};
+  color: {{ colors.on_surface.default.hex }};
+  border: 1px solid {{ colors.outline_variant.default.hex }};
+  selection-background-color: {{ colors.primary.default.hex }};
+  selection-color: {{ colors.on_primary.default.hex }};
+}
+
+/* Generic buttons that are not web-rendered (dialog buttons) */
+QPushButton {
+  background-color: {{ colors.surface_container_high.default.hex }};
+  color: {{ colors.on_surface.default.hex }};
+  border: 1px solid {{ colors.outline_variant.default.rgba | set_alpha 0.6 }};
+  border-radius: 4px;
+  padding: 4px 12px;
+}
+QPushButton:hover {
+  background-color: {{ colors.surface_container_highest.default.hex }};
+}
+QPushButton:pressed {
+  background-color: {{ colors.surface_dim.default.hex }};
+}
+QPushButton:disabled {
+  color: {{ colors.on_surface.default.rgba | set_alpha 0.35 }};
+}
+
+QTabBar::tab {
+  background-color: {{ colors.surface_container.default.hex }};
+  color: {{ colors.on_surface_variant.default.hex }};
+  padding: 6px 12px;
+}
+QTabBar::tab:selected {
+  background-color: {{ colors.surface_container_high.default.hex }};
+  color: {{ colors.on_surface.default.hex }};
+}
+QTabWidget::pane {
+  border: 1px solid {{ colors.outline_variant.default.rgba | set_alpha 0.5 }};
+}
+
+QCheckBox, QRadioButton { background: transparent; color: {{ colors.on_surface.default.hex }}; }
+
+QProgressBar {
+  background-color: {{ colors.surface_dim.default.hex }};
+  color: {{ colors.on_surface.default.hex }};
+  border: none;
+}
+QProgressBar::chunk {
+  background-color: {{ colors.primary.default.hex }};
 }
 
 QSplitter::handle {

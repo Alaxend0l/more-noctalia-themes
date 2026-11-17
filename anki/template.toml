@@ -5,13 +5,23 @@
 name = "Anki"
 category = "misc"
 
-# Anki's whole web UI (deck picker, browser, reviewer chrome, editor, stats)
-# is driven by CSS custom properties (--canvas, --fg, --button-*, --flag-*,
-# --state-*, ...). The webcss entry redefines that variable set at :root.
-# Qt window chrome (menus, tooltips, dialogs, scrollbars) is covered by QSS.
-# Both files are consumed by a minimal companion add-on (addon/) that only
+# Anki keeps three colour layers, and the template feeds all of them:
+#  - noctalia_colors.json  Anki's own colour roles (aqt.colors), which it uses
+#    to generate its Qt stylesheet, QPalette, themed toolbar icons and the
+#    custom-painted Cards/Notes switch
+#  - noctalia.css          CSS custom properties for the web views: Anki's
+#    --canvas/--fg/--button-*/--flag-*/--state-* set plus Bootstrap's --bs-* set
+#  - noctalia.qss          extra QSS appended after Anki's for the Qt chrome
+# All three are consumed by a minimal companion add-on (addon/) that only
 # reads them at startup - no timers, no live reload; new colors take effect
 # at the next Anki start, same lifecycle as the browser templates.
+
+[templates.colorjson]
+input_path          = "noctalia-colors.json"
+output_path_dynamic = "bash '{{ config_dir }}/find_anki_dirs.sh' noctalia_colors.json"
+post_hook           = "bash '{{ config_dir }}/install_addon.sh'"
+undo_hook           = "bash '{{ config_dir }}/uninstall_addon.sh'"
+hook_async          = false
 
 [templates.webcss]
 input_path          = "noctalia-web.css"

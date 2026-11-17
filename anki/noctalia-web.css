@@ -84,5 +84,55 @@
   --selected-bg: {{ colors.primary_container.default.rgba | set_alpha 0.5 }} !important;
   --selected-fg: {{ colors.on_surface.default.hex }} !important;
 
+  /* Bootstrap layer.
+     Anki's bundled pages are built on Bootstrap 5, and some of them read
+     their surface colours from Bootstrap's own custom properties instead of
+     the Anki --canvas family: the page background resolves through
+     body { background-color: var(--bs-body-bg) }, with the dark value set by
+     a [data-bs-theme=dark] rule. Redefining only the --canvas family
+     therefore leaves the legacy browser editor, and anything using Bootstrap
+     utility classes, in Anki's stock greys - so both layers get mapped here.
+     The -rgb triplets feed the background utility classes, which is what the
+     rgb_csv format is for. */
+  --bs-body-bg: {{ colors.surface.default.hex }} !important;
+  --bs-body-bg-rgb: {{ colors.surface.default.rgb_csv }} !important;
+  --bs-body-color: {{ colors.on_surface.default.hex }} !important;
+  --bs-body-color-rgb: {{ colors.on_surface.default.rgb_csv }} !important;
+  --bs-emphasis-color: {{ colors.on_surface.default.hex }} !important;
+  --bs-emphasis-color-rgb: {{ colors.on_surface.default.rgb_csv }} !important;
+
+  --bs-secondary-bg: {{ colors.surface_container_high.default.hex }} !important;
+  --bs-secondary-bg-rgb: {{ colors.surface_container_high.default.rgb_csv }} !important;
+  --bs-tertiary-bg: {{ colors.surface_container.default.hex }} !important;
+  --bs-tertiary-bg-rgb: {{ colors.surface_container.default.rgb_csv }} !important;
+  --bs-secondary-color: {{ colors.on_surface_variant.default.hex }} !important;
+  --bs-secondary-color-rgb: {{ colors.on_surface.default.rgb_csv }} !important;
+  --bs-tertiary-color: {{ colors.on_surface_variant.default.hex }} !important;
+  --bs-tertiary-color-rgb: {{ colors.on_surface.default.rgb_csv }} !important;
+
+  --bs-border-color: {{ colors.outline_variant.default.hex }} !important;
+  --bs-border-color-translucent: {{ colors.outline_variant.default.rgba | set_alpha 0.35 }} !important;
+
+  --bs-link-color: {{ colors.primary.default.hex }} !important;
+  --bs-link-color-rgb: {{ colors.primary.default.rgb_csv }} !important;
+  --bs-link-hover-color: {{ colors.primary.default.hex | lighten 15 }} !important;
+  --bs-link-hover-color-rgb: {{ colors.primary.default.rgb_csv }} !important;
+
+  --bs-primary: {{ colors.primary.default.hex }} !important;
+  --bs-primary-rgb: {{ colors.primary.default.rgb_csv }} !important;
+
+  /* semantic states: keep Anki's roles, but use the palette's hues */
+  --bs-success: {{ colors.terminal_normal_green.default.hex }} !important;
+  --bs-success-rgb: {{ colors.terminal_normal_green.default.rgb_csv }} !important;
+  --bs-danger: {{ colors.error.default.hex }} !important;
+  --bs-danger-rgb: {{ colors.error.default.rgb_csv }} !important;
+  --bs-warning: {{ colors.terminal_normal_yellow.default.hex }} !important;
+  --bs-warning-rgb: {{ colors.terminal_normal_yellow.default.rgb_csv }} !important;
+  --bs-info: {{ colors.terminal_normal_cyan.default.hex }} !important;
+  --bs-info-rgb: {{ colors.terminal_normal_cyan.default.rgb_csv }} !important;
+
+  --bs-highlight-bg: {{ colors.primary_container.default.hex }} !important;
+  --bs-highlight-bg-rgb: {{ colors.primary_container.default.rgb_csv }} !important;
+
   color-scheme: {{mode}} !important;
 }
